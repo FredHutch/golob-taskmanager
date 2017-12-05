@@ -27,7 +27,6 @@ task :test do
   task.fail_on_error = true
   result = task.run_main_task(false)
   puts result
-  Rake::Task['jsonlint'].invoke
 end
 
 task :jsonlint do
