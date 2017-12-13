@@ -12,3 +12,4 @@ issues_url 'https://github.com/fredhutch/golob-taskmanager/issues'
 source_url 'https://github.com/fredhutch/golob-taskmanager'
 
 depends 'nginx', '~>7.0.2'
+depends 'chef-vault'
