@@ -34,6 +34,8 @@ nginx_site 'root-redirect' do
   template 'nginx-proxy.erb'
   variables(
     'server_name' => node['golob-taskmanager']['server_name'],
+    'logdir' => \
+      "/var/log/sites-#{node['golob-taskmanager']['server_name']}.log",
     'ssl_cert' => node['golob-taskmanager']['ssl_cert'],
     'ssl_cert_key' => node['golob-taskmanager']['ssl_cert_key']
   )

@@ -1,11 +1,16 @@
 ---
 driver:
   name: vagrant
+  network:
+    - ["forwarded_port", {guest: 443, host: 9443}]
+  #network:
+  #  - ["forwarded_port", {guest:443, host:94443}]
 
 provisioner:
   name: chef_zero
-  # You may wish to disable always updating cookbooks in CI or other testing environments.
-  # For example:
+  # You may wish to disable always updating cookbooks in CI or other testing
+  # environments.  For example:
+  #
   #   always_update_cookbooks: <%= !ENV['CI'] %>
   always_update_cookbooks: true
 
@@ -19,6 +24,7 @@ suites:
   - name: default
     run_list:
       - recipe[golob-taskmanager::default]
+      - recipe[golob-taskmanager::luigi]
     verifier:
       inspec_tests:
         - test/smoke/default
