@@ -17,19 +17,19 @@ directory '/var/lib/luigi-server' do
   mode '0755'
 end
 
-systemd_unit 'luigid.service' do
-  content <<-EREH.gsub(/^\s+/, '')
-  [Unit]
-  Description=Luigi Scheduler Daemon
-  After=network.target
-  [Service]
-  ExecStart=/opt/luigi/bin/luigid --pidfile /var/run/luigi-server.pid --logdir=/var/log --state=path=/var/lib/luigi-server
-  KillMode=process
-  Restart=on-failure
-  Type=simple
-  [Install]
-  WantedBy=multi-user.target
-  Alias=luigid.service
-  EREH
-  action [:create, :enable]
+execute 'enable luigid systemd unit' do
+  command '/bin/systemctl enable luigid.service'
+  action :nothing
+end
+
+template '/lib/systemd/system/luigid.service' do
+  source 'luigid.service.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  notifies :run, 'execute[enable luigid systemd unit]', :immediately
+end
+
+service 'luigid' do
+  action :start
 end

@@ -1,0 +1,11 @@
+[Unit]
+Description=Luigi Scheduler Daemon
+After=network.target
+[Service]
+ExecStart=/opt/luigi/bin/luigid --pidfile /var/run/luigi-server.pid --logdir=/var/log --state=path=/var/lib/luigi-server
+KillMode=process
+Restart=on-failure
+Type=simple
+[Install]
+WantedBy=multi-user.target
+Alias=luigid.service
