@@ -19,21 +19,17 @@ end
 
 systemd_unit 'luigid.service' do
   content <<-EREH.gsub(/^\s+/, '')
-    [Unit]
-    Description=Luigi Scheduler Daemon
-    After=network.target
-
-    [Service]
-    ExecStart=/opt/luigi/bin/luigid --pidfile /var/run/luigi-server.pid --logdir=/var/log --state=path=/var/lib/luigi-server
-    ExecReload=/bin/kill -HUP $MAINPID
-    KillMode=process
-    Restart=on-failure
-    RestartPreventExitStatus=255
-    Type=notify
-
-    [Install]
-    WantedBy=multi-user.target
-    Alias=luigid.service
+  [Unit]
+  Description=Luigi Scheduler Daemon
+  After=network.target
+  [Service]
+  ExecStart=/opt/luigi/bin/luigid --pidfile /var/run/luigi-server.pid --logdir=/var/log --state=path=/var/lib/luigi-server
+  KillMode=process
+  Restart=on-failure
+  Type=simple
+  [Install]
+  WantedBy=multi-user.target
+  Alias=luigid.service
   EREH
   action [:create, :enable]
 end
