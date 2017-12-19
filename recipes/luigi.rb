@@ -31,5 +31,5 @@ systemd_unit 'luigid.service' do
   WantedBy=multi-user.target
   Alias=luigid
   EREH
-  action [:create, :enable]
+  action [:create, :enable, :start]
 end
