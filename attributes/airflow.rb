@@ -1,0 +1,1 @@
+default['airflow']['packages'] = {}

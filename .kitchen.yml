@@ -23,6 +23,7 @@ suites:
     run_list:
       - recipe[golob-taskmanager::default]
       - recipe[golob-taskmanager::luigi]
+      - recipe[golob-taskmanager::airflow]
     verifier:
       inspec_tests:
         - test/smoke/default
