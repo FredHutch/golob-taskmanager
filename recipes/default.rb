@@ -37,7 +37,7 @@ directory "/var/log/sites-#{node['golob-taskmanager']['server_name']}" do
 end
 
 nginx_site 'luigi' do
-  template 'luigi.erb'
+  template 'nginx/luigi.erb'
   variables(
     'server_name' => node['golob-taskmanager']['server_name'],
     'logdir' => \
