@@ -10,7 +10,8 @@ include_recipe 'chef-vault'
 # load secrets from vault
 
 tls_data = chef_vault_item(
-  node['golob-taskmanager']['server_name'], 'certificate'
+  node['golob-taskmanager']['tls']['vault'],
+  node['golob-taskmanager']['tls']['vault_item']
 )
 key = tls_data['key']
 cert = tls_data['certificate']
@@ -36,8 +37,8 @@ directory "/var/log/sites-#{node['golob-taskmanager']['server_name']}" do
   group 'root'
 end
 
-nginx_site 'taskmanager' do
-  template 'nginx/taskmanager.erb'
+nginx_site 'luigi' do
+  template 'nginx/luigi.erb'
   variables(
     'server_name' => node['golob-taskmanager']['server_name'],
     'logdir' => \
