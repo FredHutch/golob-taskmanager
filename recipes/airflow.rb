@@ -16,6 +16,6 @@ end
 
 include_recipe 'airflow::webserver'
 
-service "airflow-webserver" do
-    action [:start]
+service 'airflow-webserver' do
+  action [:start]
 end
